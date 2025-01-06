@@ -1,0 +1,110 @@
+#include <iostream>
+#include <windows.h>
+
+using namespace std;
+
+char start;
+int language;
+int menumode;
+
+int card;
+char pincode;
+int balance = 10000;
+int withdrawmoney;
+
+
+void uamenu() {
+	cout << "Виберіть режим роботи(1 - перевірити баланс, 2 - зняти кошти, 3 - вийти):\n";
+
+	cin >> menumode;
+
+	switch (menumode) {
+	case 1: { 
+		cout << "Ваш баланс: " << balance << endl;
+		break; }
+	case 2: { 
+		cout << "Введіть суму яку бажаєте зняти: ";
+		cin >> withdrawmoney;
+		if (withdrawmoney > balance) {
+			cout << "Вибачте сталася помилка!\n";
+			cout << "На вашому рахунку не достатньо коштів для зняття цієї суми\n";
+		}
+		else {
+			cout << "Введіть ваш пінкод: ";
+			cin >> pincode;
+			balance -= withdrawmoney;
+			cout << "Ви зняли: " << withdrawmoney << endl;
+			cout << "Ваш баланс зараз: " << balance << endl;
+		}
+		break; }
+	case 3: { break; }
+	default: { cout << "Перепрошуємо, але банкомат не підтримує більше ніяких режимів роботи\n"; }
+	}
+}
+
+void enmenu() {
+	cout << "\nChoose work mode(1 - check blance, 2 - withdraw money, 3 - exit) : \n";
+
+	cin >> menumode;
+
+	switch (menumode) {
+	case 1: { 
+		cout << "Your blance: " << balance << endl;
+		break; }
+	case 2: { 
+		cout << "Enter the amount of money you want to withdraw: ";
+		cin >> withdrawmoney;
+		if(withdrawmoney > balance){
+			cout << "There are not enough funds to withdraw this amount\n";
+		}
+		else {
+			cout << "Enter yout pincode: ";
+			cin >> pincode;
+			balance -= withdrawmoney;
+			cout << "Your withdraw money: " << withdrawmoney << endl;
+			cout << "Now your balance: " << balance << endl;
+		}
+		break; }
+	case 3: { break; }
+	default: { cout << "Sorry, but ATM don`t support other`s mode works\n"; }
+	}
+}
+
+
+void englishstart() {
+	cout << "\nHello!\n";
+	cout << "Enter your card...\n";
+	cout << "Card inserted\n";
+	enmenu();
+}
+void ukrainianstart() {
+	cout << "\nВітаю!\n";
+	cout << "Вставте вашу карту...\n";
+	cout << "карту вставлено\n";
+	uamenu();
+}
+
+int main() {
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+
+	cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n";
+	cout << "Attention!!! This is an ATM simulator, not an actual ATM system\nAlso, just in case you download the game not from Itch.io, please do not enter any of your own real data, as it is not required anyway\nYou can come up with your own pin code for the game and it doesn't have to be the same\n";
+	cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n";
+	
+	while (true) {
+		cout << "\nIf you want start enter number or symbol, or word:\n";
+		cin >> start;
+
+		cout << "\nChoose language(1 - english, 2 - українська):\n";
+		cin >> language;
+
+		switch (language) {
+		case 1: { englishstart(); break; }
+		case 2: { ukrainianstart(); break; }
+		default: { cout << "Sorry, but ATM don`t support other language\n"; }
+		}
+	}
+
+	return 0;
+}
